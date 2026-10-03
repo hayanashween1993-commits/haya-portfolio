@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ورقة عمل تفاعلية في ترتيب الأعداد ضمن ٩٩ للصف الثاني الأساسي">
+<title>ترتيب الأعداد ضمن ٩٩ | ورقة عمل تفاعلية</title>
+
+<style>
+  /* الخط المطلوب: شهرزاد/شهرزاد الجديدة، مع بدائل محلية عند عدم توفره */
+  :root{
+    --ink:#263238;
+    --primary:#176b87;
+    --secondary:#f2a93b;
+    --soft:#eef8f7;
+    --green:#3b8d5a;
+    --red:#c84c4c;
+    --paper:#fffdf7;
+    --line:#cbd9d7;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:#e9f2f1;
+    color:var(--ink);
+    font-family:"Scheherazade New","Shahrazad","شهرزاد","Noto Naskh Arabic","Traditional Arabic",serif;
+    font-size:20px;
+    line-height:1.55;
+  }
+  .sheet{
+    width:min(900px,96vw);
+    margin:18px auto;
+    background:var(--paper);
+    border:3px solid #8eb9b5;
+    border-radius:22px;
+    box-shadow:0 12px 35px rgba(0,0,0,.12);
+    overflow:hidden;
+  }
+  header{
+    padding:20px 24px 14px;
+    background:linear-gradient(135deg,#e4f5f2,#fff4d8);
+    border-bottom:3px solid #8eb9b5;
+  }
+  .school{
+    text-align:center;
+    font-weight:800;
+    font-size:27px;
+    color:#13596f;
+  }
+  .subline{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:10px;
+    margin-top:12px;
+    font-size:18px;
+  }
+  .field{
+    background:#fff;
+    border:2px solid #a8c9c5;
+    border-radius:12px;
+    padding:7px 10px;
+  }
+  input[type=text], input[type=date]{
+    border:0;
+    outline:0;
+    width:100%;
+    background:transparent;
+    font:inherit;
+    color:var(--ink);
+  }
+  .title{
+    text-align:center;
+    margin:15px auto 7px;
+    font-size:34px;
+    font-weight:900;
+    color:#155f76;
+  }
+  .goal{
+    text-align:center;
+    margin:0 auto;
+    max-width:760px;
+    font-size:19px;
+  }
+  .citizenship{
+    margin-top:14px;
+    padding:10px 14px;
+    border-radius:15px;
+    background:#e9f7eb;
+    border:2px dashed #75ad7d;
+    text-align:center;
+    font-weight:700;
+  }
+  main{padding:18px 22px 12px}
+  .section{
+    border:2px solid var(--line);
+    border-radius:18px;
+    margin:0 0 15px;
+    padding:15px;
+    background:#fff;
+  }
+  .section h2{
+    margin:0 0 10px;
+    color:#155f76;
+    font-size:25px;
+  }
+  .instruction{
+    margin:0 0 10px;
+    font-size:19px;
+  }
+  .number-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin:10px 0;
+  }
+  .num-card{
+    min-width:82px;
+    padding:10px 14px;
+    background:#fff8df;
+    border:2px solid #e0b85b;
+    border-radius:14px;
+    text-align:center;
+    font-size:27px;
+    font-weight:800;
+  }
+  .choices{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+  }
+  button{
+    font-family:inherit;
+    font-size:20px;
+    border:2px solid #8db7b3;
+    border-radius:14px;
+    background:#f5fbfa;
+    padding:10px 12px;
+    cursor:pointer;
+    transition:.15s;
+    color:var(--ink);
+  }
+  button:hover{transform:translateY(-1px)}
+  button:active{transform:scale(.98)}
+  button.selected{border-color:var(--primary);background:#dff2f5}
+  button.correct{border-color:var(--green);background:#dff3e4}
+  button.wrong{border-color:var(--red);background:#fde4e4}
+  .answer-box{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:8px;
+  }
+  .answer{
+    min-height:56px;
+    border:2px dashed #9ebbb7;
+    border-radius:13px;
+    background:#fbfffe;
+    text-align:center;
+    padding:7px;
+    font-size:25px;
+  }
+  .answer button{width:100%;border:0;background:transparent}
+  .tiny-note{
+    font-size:16px;
+    color:#526b6a;
+    margin-top:5px;
+  }
+  .feedback{
+    min-height:30px;
+    font-weight:800;
+    text-align:center;
+    margin-top:8px;
+  }
+  .word-task{
+    background:#f8fbf7;
+    border-right:7px solid #75ad7d;
+    padding:10px 13px;
+    border-radius:12px;
+    margin-bottom:10px;
+  }
+  .blank{
+    width:85px;
+    border-bottom:3px solid #456d68 !important;
+    border-radius:0 !important;
+    text-align:center;
+    font-weight:800;
+  }
+  .actions{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin:14px 0;
+  }
+  .primary{
+    background:#176b87;
+    color:white;
+    border-color:#176b87;
+    padding:11px 22px;
+  }
+  .secondary{
+    background:#fff1d2;
+    border-color:#e0b85b;
+  }
+  .score{
+    text-align:center;
+    font-size:24px;
+    font-weight:900;
+    color:#155f76;
+    padding:8px;
+  }
+  footer{
+    padding:13px 18px 18px;
+    text-align:center;
+    color:#526b6a;
+    font-size:17px;
+    border-top:2px solid var(--line);
+    background:#f7fbfa;
+  }
+  .badge{
+    display:inline-block;
+    padding:4px 12px;
+    border-radius:999px;
+    background:#fff0c7;
+    border:1px solid #e0b85b;
+    margin:3px;
+  }
+  .progress{
+    height:12px;
+    background:#e6eeee;
+    border-radius:99px;
+    overflow:hidden;
+    margin-top:8px;
+  }
+  .bar{
+    height:100%;
+    width:0%;
+    background:#3b8d5a;
+    transition:.25s;
+  }
+  @media(max-width:650px){
+    body{font-size:18px}
+    .sheet{width:98vw;margin:6px auto;border-radius:15px}
+    header,main{padding-left:12px;padding-right:12px}
+    .subline{grid-template-columns:1fr}
+    .title{font-size:29px}
+    .choices,.answer-box{grid-template-columns:1fr}
+    .num-card{min-width:70px}
+  }
+  @media print{
+    body{background:#fff}
+    .sheet{width:100%;margin:0;border:0;box-shadow:none}
+    button{color:#000}
+    .actions,.progress{display:none}
+    .section{break-inside:avoid}
+  }
+</style>
+</head>
+
+<body>
+<div class="sheet">
+
+<header>
+  <div class="school">مدرسة بنات الكرامة الأساسية</div>
+
+  <div class="subline">
+    <div class="field"><strong>اسم الطالبة:</strong><input id="studentName" type="text" placeholder="اكتبي اسمك هنا"></div>
+    <div class="field"><strong>اليوم:</strong><input id="day" type="text" placeholder="اليوم"></div>
+    <div class="field"><strong>التاريخ:</strong><input id="date" type="date"></div>
+  </div>
+
+  <div class="subline" style="grid-template-columns:1fr">
+    <div class="field" style="text-align:center"><strong>الصف:</strong> الثاني الأساسي</div>
+  </div>
+
+  <div class="title">🌿 مغامرة ترتيب الأعداد ضمن ٩٩ 🌿</div>
+  <p class="goal">
+    أرتّب الأعداد تصاعديًّا وتنازليًّا، وأستخدم مهارتي في مواقف من حياتي المدرسية
+    لأكون طالبةً متعاونةً تحافظ على النظام والبيئة.
+  </p>
+  <div class="citizenship">
+    🌱 <span class="badge">التعاون</span>
+    <span class="badge">النظام</span>
+    <span class="badge">المحافظة على البيئة</span>
+    🌱
+  </div>
+</header>
+
+<main>
+
+<section class="section">
+  <h2>⭐ المهمة الأولى: أرتّب من الأصغر إلى الأكبر</h2>
+  <p class="instruction">اضغطي على الأعداد بالترتيب الصحيح من الأصغر إلى الأكبر.</p>
+  <div id="set1" class="number-row"></div>
+  <div class="answer-box" id="ans1">
+    <div class="answer" id="a1">الأول</div>
+    <div class="answer" id="a2">الثاني</div>
+    <div class="answer" id="a3">الثالث</div>
+  </div>
+  <div id="fb1" class="feedback"></div>
+</section>
+
+<section class="section">
+  <h2>⭐ المهمة الثانية: أرتّب من الأكبر إلى الأصغر</h2>
+  <p class="instruction">اختاري الترتيب الصحيح.</p>
+  <div class="number-row">
+    <div class="num-card">٧٢</div><div class="num-card">٢٧</div><div class="num-card">٥٧</div>
+  </div>
+  <div class="choices" id="choices2">
+    <button data-correct="false">٢٧ ، ٥٧ ، ٧٢</button>
+    <button data-correct="true">٧٢ ، ٥٧ ، ٢٧</button>
+    <button data-correct="false">٥٧ ، ٢٧ ، ٧٢</button>
+  </div>
+  <div id="fb2" class="feedback"></div>
+</section>
+
+<section class="section">
+  <h2>🌍 المهمة الثالثة: رياضيات ومواطنة</h2>
+  <div class="word-task">
+    شاركت طالبات الصف في حملة المحافظة على نظافة المدرسة. جمعت المجموعة الأولى
+    <strong>٣٢</strong> ورقةً، وجمعت المجموعة الثانية <strong>٢٣</strong> ورقةً،
+    وجمعت المجموعة الثالثة <strong>٤٢</strong> ورقةً.
+    <br><strong>رتّبي الأعداد من الأقل إلى الأكثر.</strong>
+  </div>
+  <div class="number-row">
+    <button class="civic-num" data-value="٣٢">٣٢</button>
+    <button class="civic-num" data-value="٢٣">٢٣</button>
+    <button class="civic-num" data-value="٤٢">٤٢</button>
+  </div>
+  <div id="civicAnswer" class="answer-box">
+    <div class="answer" id="c1">الأول</div>
+    <div class="answer" id="c2">الثاني</div>
+    <div class="answer" id="c3">الثالث</div>
+  </div>
+  <div id="fb3" class="feedback"></div>
+</section>
+
+<section class="section">
+  <h2>💡 المهمة الرابعة: أكتشف العدد الناقص</h2>
+  <p class="instruction">أكملي الترتيب التصاعدي:</p>
+  <div class="number-row" style="align-items:center">
+    <span class="num-card">٤١</span>
+    <span style="font-size:30px">←</span>
+    <input class="blank" id="missing" inputmode="numeric" maxlength="2" aria-label="العدد الناقص">
+    <span style="font-size:30px">←</span>
+    <span class="num-card">٤٣</span>
+  </div>
+  <div id="fb4" class="feedback"></div>
+</section>
+
+<section class="section">
+  <h2>🏡 المهمة الخامسة: أختار السلوك الصحيح</h2>
+  <p class="instruction">
+    عندما نرتّب أدوات الصف بعد انتهاء النشاط، فإننا نحافظ على
+    <strong>النظام</strong> ونسهّل العمل على الجميع.
+    أيُّ سلوك يدلّ على المواطنة الصالحة؟
+  </p>
+  <div class="choices" id="choices5">
+    <button data-correct="false">أترك الأدوات مبعثرة.</button>
+    <button data-correct="true">أعيد الأدوات إلى أماكنها وأساعد زميلاتي.</button>
+    <button data-correct="false">آخذ أدوات الآخرين دون استئذان.</button>
+  </div>
+  <div id="fb5" class="feedback"></div>
+</section>
+
+<div class="score">نتيجتي: <span id="score">٠</span> من ٥</div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+
+<div class="actions">
+  <button class="primary" onclick="checkAll()">✅ تحقّقي من إجاباتي</button>
+  <button class="secondary" onclick="resetSheet()">↺ إعادة المحاولة</button>
+  <button onclick="window.print()">🖨️ طباعة الورقة</button>
+</div>
+
+</main>
+
+<footer>
+  إعداد هيا صالحي<br>
+  بترخيص المشاع الإبداعي <strong>CC BY-NC</strong> — يُسمح بالمشاركة والاستخدام غير التجاري مع ذكر المصدر.
+</footer>
+
+</div>
+
+<script>
+const arabicDigits = {'0':'٠','1':'١','2':'٢','3':'٣','4':'٤','5':'٥','6':'٦','7':'٧','8':'٨','9':'٩'};
+const toArabic = s => String(s).replace(/[0-9]/g, d => arabicDigits[d]);
+const toLatin = s => String(s).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+
+let score = 0;
+let answered = new Set();
+
+const set1Values = ['١٨','٧','٣٥'];
+const set1Order = ['٧','١٨','٣٥'];
+const selected1 = [];
+
+function renderSet1(){
+  const box = document.getElementById('set1');
+  box.innerHTML = '';
+  [...set1Values].sort(()=>Math.random()-0.5).forEach(v=>{
+    const b=document.createElement('button');
+    b.className='num-card';
+    b.textContent=v;
+    b.onclick=()=>{
+      if(selected1.includes(v)) return;
+      selected1.push(v);
+      b.classList.add('selected');
+      const idx=selected1.length;
+      document.getElementById('a'+idx).textContent=v;
+      if(idx===3) check1();
+    };
+    box.appendChild(b);
+  });
+}
+function check1(){
+  const ok=selected1.every((v,i)=>v===set1Order[i]);
+  answered.add('q1');
+  if(ok){
+    document.getElementById('fb1').textContent='أحسنتِ! رتّبتِ الأعداد ترتيبًا تصاعديًّا صحيحًا. 🌟';
+    document.getElementById('fb1').style.color='var(--green)';
+    score++;
+  }else{
+    document.getElementById('fb1').textContent='حاولي مرة أخرى: قارني الأعداد وابدئي بالأصغر.';
+    document.getElementById('fb1').style.color='var(--red)';
+  }
+  updateScore();
+}
+
+function wireChoices(containerId, feedbackId){
+  document.querySelectorAll('#'+containerId+' button').forEach(btn=>{
+    btn.onclick=()=>{
+      const all=document.querySelectorAll('#'+containerId+' button');
+      all.forEach(x=>x.classList.remove('correct','wrong'));
+      if(btn.dataset.correct==='true'){
+        btn.classList.add('correct');
+        document.getElementById(feedbackId).textContent='إجابة صحيحة! 🌟';
+        document.getElementById(feedbackId).style.color='var(--green)';
+        const key=containerId;
+        if(!answered.has(key)){score++; answered.add(key);}
+      }else{
+        btn.classList.add('wrong');
+        document.getElementById(feedbackId).textContent='ليست الإجابة الصحيحة. فكّري في معنى الترتيب المطلوب.';
+        document.getElementById(feedbackId).style.color='var(--red)';
+      }
+      updateScore();
+    };
+  });
+}
+
+const civicValues=['٢٣','٣٢','٤٢'];
+const civicSelected=[];
+document.querySelectorAll('.civic-num').forEach(b=>{
+  b.onclick=()=>{
+    const v=b.dataset.value;
+    if(civicSelected.includes(v)) return;
+    civicSelected.push(v);
+    b.classList.add('selected');
+    const idx=civicSelected.length;
+    document.getElementById('c'+idx).textContent=v;
+    if(idx===3){
+      const ok=civicSelected.every((v,i)=>v===civicValues[i]);
+      answered.add('q3');
+      document.getElementById('fb3').textContent=ok
+        ? 'رائع! رتّبتِ الأعداد، وأدركتِ قيمة العمل من أجل بيئة مدرسية نظيفة. 🌱'
+        : 'راجعي الترتيب: ابدئي بالعدد الأقل.';
+      document.getElementById('fb3').style.color=ok?'var(--green)':'var(--red)';
+      if(ok) score++;
+      updateScore();
+    }
+  };
+});
+
+document.getElementById('missing').addEventListener('input', e=>{
+  e.target.value=e.target.value.replace(/[^0-9٠-٩]/g,'').slice(0,2);
+});
+
+function checkAll(){
+  const m=toLatin(document.getElementById('missing').value);
+  if(m==='42'){
+    if(!answered.has('q4')){score++;answered.add('q4');}
+    document.getElementById('fb4').textContent='أحسنتِ! العدد الناقص هو ٤٢.';
+    document.getElementById('fb4').style.color='var(--green)';
+  }else{
+    document.getElementById('fb4').textContent='فكّري: ما العدد الذي يقع بين ٤١ و٤٣؟';
+    document.getElementById('fb4').style.color='var(--red)';
+  }
+  updateScore();
+}
+
+function updateScore(){
+  document.getElementById('score').textContent=toArabic(score);
+  document.getElementById('bar').style.width=(score/5*100)+'%';
+  localStorage.setItem('worksheetScore',score);
+  localStorage.setItem('studentName',document.getElementById('studentName').value);
+}
+
+function resetSheet(){
+  score=0; answered.clear();
+  selected1.length=0; civicSelected.length=0;
+  document.getElementById('score').textContent='٠';
+  document.getElementById('bar').style.width='0%';
+  document.getElementById('fb1').textContent='';
+  document.getElementById('fb2').textContent='';
+  document.getElementById('fb3').textContent='';
+  document.getElementById('fb4').textContent='';
+  document.getElementById('fb5').textContent='';
+  document.getElementById('missing').value='';
+  ['a1','a2','a3','c1','c2','c3'].forEach(id=>document.getElementById(id).textContent=id[0]==='a'?['الأول','الثاني','الثالث'][Number(id[1])-1]:['الأول','الثاني','الثالث'][Number(id[1])-1]);
+  document.querySelectorAll('button').forEach(b=>b.classList.remove('selected','correct','wrong'));
+  renderSet1();
+  wireChoices('choices2','fb2');
+  wireChoices('choices5','fb5');
+}
+
+document.getElementById('studentName').addEventListener('input',()=>{
+  localStorage.setItem('studentName',document.getElementById('studentName').value);
+});
+
+const savedName=localStorage.getItem('studentName');
+if(savedName) document.getElementById('studentName').value=savedName;
+
+renderSet1();
+wireChoices('choices2','fb2');
+wireChoices('choices5','fb5');
+</script>
+</body>
+</html>
